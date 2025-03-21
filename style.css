@@ -1,7 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #1a1f4b, #2e3472);
+    background: linear-gradient(to right, #1b1f38, #2c3e50);
     color: white;
     margin: 0;
     padding: 0;
@@ -13,7 +13,7 @@ h1 {
 }
 
 button {
-    background: #8a2be2;
+    background: #6a11cb;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -24,7 +24,7 @@ button {
 }
 
 button:hover {
-    background: #6a11cb;
+    background: #8e44ad;
 }
 
 .container {
@@ -46,9 +46,19 @@ button:hover {
     background: #d1d8e0;
     border-radius: 4px;
     transition: height 0.3s ease;
+    position: relative;
 }
 
-.bubble { background: #3498db !important; box-shadow: 0 0 8px #3498db; }
+.bar span {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: white;
+}
+
+.bubble { background: #00cec9 !important; box-shadow: 0 0 8px #00cec9; }
 .insertion { background: #e74c3c !important; box-shadow: 0 0 8px #e74c3c; }
 .merge { background: #2ecc71 !important; box-shadow: 0 0 8px #2ecc71; }
 .sorted { background: #f39c12 !important; box-shadow: 0 0 8px #f39c12; }
@@ -73,7 +83,7 @@ button:hover {
     border-radius: 4px;
 }
 
-.legend-bubble { background: #3498db; }
+.legend-bubble { background: #00cec9; }
 .legend-insertion { background: #e74c3c; }
 .legend-merge { background: #2ecc71; }
 .legend-sorted { background: #f39c12; }

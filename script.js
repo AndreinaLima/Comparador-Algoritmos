@@ -2,7 +2,7 @@ let array = []
 let delay
 const normalDelay = 300
 const fastDelay = 10
-let comparisonCount = 0
+let comparisons = 0
 
 function generateArray() {
   const container = document.getElementById("array-container")
@@ -13,45 +13,45 @@ function generateArray() {
     const bar = document.createElement("div")
     bar.style.height = `${value * 3}px`
     bar.classList.add("bar")
+
+    const label = document.createElement("span")
+    label.textContent = value
+
+    bar.appendChild(label)
     container.appendChild(bar)
   })
 
   delay = normalDelay
-  comparisonCount = 0
-  updateComparisonCount()
+  comparisons = 0
+  updateComparisonCounter()
 }
 
 function speedUp() {
   delay = fastDelay
 }
 
-async function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time))
-}
-
-function updateComparisonCount() {
-  const counter = document.getElementById("comparison-counter")
-  if (counter) {
-    counter.innerText = `Comparações: ${comparisonCount}`
-  }
+function updateComparisonCounter() {
+  document.getElementById(
+    "comparison-counter"
+  ).textContent = `Comparações: ${comparisons}`
 }
 
 async function bubbleSort() {
   let bars = document.querySelectorAll(".bar")
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
-      comparisonCount++
-      updateComparisonCount()
+      comparisons++
+      updateComparisonCounter()
 
       bars[j].classList.add("bubble")
       bars[j + 1].classList.add("bubble")
 
-      await sleep(delay)
+      await new Promise((resolve) => setTimeout(resolve, delay))
 
       if (array[j] > array[j + 1]) {
         ;[array[j], array[j + 1]] = [array[j + 1], array[j]]
         updateBars()
-        await sleep(delay)
+        await new Promise((resolve) => setTimeout(resolve, delay))
       }
 
       bars[j].classList.remove("bubble")
@@ -70,17 +70,18 @@ async function insertionSort() {
     let j = i - 1
     bars[i].classList.add("insertion")
 
-    await sleep(delay)
+    await new Promise((resolve) => setTimeout(resolve, delay))
 
     while (j >= 0 && array[j] > key) {
-      comparisonCount++
-      updateComparisonCount()
+      comparisons++
+      updateComparisonCounter()
 
       array[j + 1] = array[j]
       j--
       updateBars()
-      await sleep(delay)
+      await new Promise((resolve) => setTimeout(resolve, delay))
     }
+
     array[j + 1] = key
     updateBars()
     bars[i].classList.remove("insertion")
@@ -91,7 +92,6 @@ async function insertionSort() {
 
 async function mergeSortWrapper() {
   await mergeSort(0, array.length - 1)
-
   document
     .querySelectorAll(".bar")
     .forEach((bar) => bar.classList.add("sorted"))
@@ -114,8 +114,8 @@ async function merge(left, mid, right) {
     k = 0
 
   while (j < leftArr.length && k < rightArr.length) {
-    comparisonCount++
-    updateComparisonCount()
+    comparisons++
+    updateComparisonCounter()
 
     bars[i].classList.add("merge")
     if (leftArr[j] <= rightArr[k]) {
@@ -124,7 +124,7 @@ async function merge(left, mid, right) {
       array[i] = rightArr[k++]
     }
     updateBars()
-    await sleep(delay)
+    await new Promise((resolve) => setTimeout(resolve, delay))
     bars[i].classList.remove("merge")
     i++
   }
@@ -133,7 +133,7 @@ async function merge(left, mid, right) {
     bars[i].classList.add("merge")
     array[i] = leftArr[j++]
     updateBars()
-    await sleep(delay)
+    await new Promise((resolve) => setTimeout(resolve, delay))
     bars[i].classList.remove("merge")
     i++
   }
@@ -142,7 +142,7 @@ async function merge(left, mid, right) {
     bars[i].classList.add("merge")
     array[i] = rightArr[k++]
     updateBars()
-    await sleep(delay)
+    await new Promise((resolve) => setTimeout(resolve, delay))
     bars[i].classList.remove("merge")
     i++
   }
@@ -153,6 +153,7 @@ function updateBars() {
     let bars = document.querySelectorAll(".bar")
     for (let i = 0; i < array.length; i++) {
       bars[i].style.height = `${array[i] * 3}px`
+      bars[i].querySelector("span").textContent = array[i]
     }
   })
 }
