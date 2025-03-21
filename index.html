@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizador de Algoritmos de Ordenação</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Visualizador de Algoritmos de Ordenação</h1>
+
+  <button onclick="generateArray()">Gerar Novo Array</button>
+  <button onclick="bubbleSort()">Bubble Sort</button>
+  <button onclick="insertionSort()">Insertion Sort</button>
+  <button onclick="mergeSortWrapper()">Merge Sort</button>
+  <button onclick="speedUp()">Avançar</button>
+
+  <div class="container" id="array-container"></div>
+
+  <div class="legend">
+    <p><span class="legend-bubble"></span> Bubble Sort</p>
+    <p><span class="legend-insertion"></span> Insertion Sort</p>
+    <p><span class="legend-merge"></span> Merge Sort</p>
+    <p><span class="legend-sorted"></span> Ordenado</p>
+  </div>
+
+  <p id="comparison-counter">Comparações: 0</p>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
